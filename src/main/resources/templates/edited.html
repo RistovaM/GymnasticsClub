@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date of Birth</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${edenperson[0][personid]}"></td>
+        <td th:text="${edenperson[0][fisrtname]}"></td>
+        <td th:text="${edenperson[0][lastname]}"></td>
+        <td th:text="${edenperson[0][dateofbirth]}"></td>
+    </tr>
+    </tbody>
+</table>
+<!--<th:block>-->
+<!--    <input name="member" th:value="${member[0][groupnumberid]}" />-->
+<!--</th:block>-->
+<form th:method="POST" th:action="@{'/change'}">
+    <input name="id" type="hidden" th:value="${edenperson[0][personid]}">
+<th:block th:if="${member != 'nema'}">
+        <input name="member" th:value="${member[0][groupnumberid]}" />
+</th:block>
+<th:block th:if="${member == 'nema'}">
+        <input name="member" />
+</th:block>
+<button>change group</button>
+</form>
+</body>
+</html>

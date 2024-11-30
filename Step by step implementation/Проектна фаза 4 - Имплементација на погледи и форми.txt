@@ -1,0 +1,83 @@
+--Приказ на членовите кои освоиле само медали
+create view ListAllMedalists as
+select
+	Person.fisrtname, 
+	Person.lastname ,
+	Achievement.achievementtype 
+from
+	person 
+left join Achievement on Person.personid = Achievement.personID
+where achievementtype !='commendation'
+
+--Приказ на членовите кои освоиле златни медали
+create view ListGoldMedalists
+select
+	Person.fisrtname, 
+	Person.lastname ,
+	Achievement.achievementtype 
+from
+	person 
+left join Achievement on Person.personid = Achievement.personID
+where achievementtype like '%gold medal%'
+
+--Приказ на членовите во која група спаѓаат и во кој клас тренираат
+create view ListMembersAndGroups as
+select 
+	Person.fisrtname,
+	Person.lastname,
+	Class.classname,
+	"Group".groupnumberid
+from member 
+left join Person on Member.personID = Person.personID
+left join member_attends_class on member.personid = member_attends_class.personid 
+left join class on Member_attends_Class.classid = class.classid 
+left join "Group" on member.groupnumberid = "Group".groupnumberid 
+
+select * from "class" 
+--Приказ на сите членови во клубот кои освоиле награда на одреден тип на натпревар
+create view ListAllBeginners as
+select
+    Person.lastName,
+    Person.fisrtname,
+    "Group".groupnumberid ,
+    Person.dateOfBirth,
+    Achievement.achievementtype,
+    Competition.competitiontype
+   
+from
+    Member
+left join "Group" on Member.groupNumberID = "Group".groupnumberid 
+left join TestOfKnowledge ON Member.testOfKnowledgeID = TestOfKnowledge.testOfKnowledgeID
+left join Person on Member.personID = Person.personID
+left join Achievement on Member.personID = Achievement.personID
+left join Competition on Achievement.competitionID = Competition.competitionID
+
+
+order by
+    Member.personID;
+   
+   select * from ListAllBeginners
+
+
+
+--Форма за внес на нов член во клубот
+select * from person;
+insert into person (fisrtName, lastName, dateOfBirth, tellNo)
+values
+('Ana', 'Milanova', '10.07.2010', '078556900')
+
+
+--Форма за внесување на термини
+insert into Schedule(time, dayOfWeek)
+values
+('14:00:00', 'Friday')
+
+
+--Форма за внесување на освоени медали
+insert into Achievement(achievementID, competitionID, personID, achievementType)
+values
+(8, 5, 10, 'commendation')
+
+
+
+

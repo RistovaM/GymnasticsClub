@@ -1,0 +1,133 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Cute Homepage</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #add8e6;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            margin: 50px auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #fff;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .button {-->
+<!--            display: inline-block;-->
+<!--            padding: 10px 20px;-->
+<!--            margin: 10px;-->
+<!--            background-color: #007bff;-->
+<!--            color: #fff;-->
+<!--            text-decoration: none;-->
+<!--            border-radius: 5px;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <h1>Gymnastics Club</h1>-->
+<!--    <a th:href="@{'/person/all'}" class="button">Gymnasts</a>-->
+<!--    <a th:href="@{'/medalists/all'}" class="button">Medalists</a>-->
+<!--    <a th:href="@{'/groups/all'}" class="button">Groups</a>-->
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #add8e6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 80%;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gymnastics Club</h1>
+    <a th:href="@{'/person/all'}" class="button">Gymnasts</a>
+    <a th:href="@{'/medalists/all'}" class="button">Medalists</a>
+    <a th:href="@{'/groups/all'}" class="button">Groups</a>
+
+    <!-- First section -->
+    <div class="section">
+        <h2>Join Our Club</h2>
+        <p>We welcome new members! Join our gymnastics club today and unleash your potential.</p>
+        <a th:href="@{'/personGet'}" class="button">Join Now</a>
+    </div>
+
+</div>
+
+</body>
+</html>
+

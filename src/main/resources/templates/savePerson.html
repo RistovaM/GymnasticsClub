@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Person</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #add8e6;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Apply to be part of the club</h2>
+
+<form th:action="@{'/personSave'}" th:method="POST">
+    <label for="personId">Person ID:</label>
+    <input type="number" id="personId" name="personid" th:value="${personID}" /><br>
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="fisrtname" th:value="${firstName}" /><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastname" th:value="${lastName}" /><br>
+
+
+    <label for="firstName">Date of birth:</label>
+    <input type="date" id="dateOfBirth" name="dateofbirth" th:value="${dateofbirth}" /><br>
+
+    <label for="tellNo">Telephone Number:</label>
+    <input type="text" id="tellNo" name="tellno" th:value="${tellNo}" /><br>
+
+    <button type="submit">Submit</button>
+    <a href="/" class="button">Back</a>
+</form>
+
+
+</body>
+</html>

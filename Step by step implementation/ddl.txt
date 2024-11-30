@@ -1,0 +1,275 @@
+create table "Group"(
+groupNumberID integer primary key
+)
+insert into "Group"(groupNumberID)
+values
+(1),
+(2),
+(3),
+(4)
+
+create table TestOfKnowledge(
+testOfKnowledgeID integer primary key,
+points integer
+)
+insert into TestOfKnowledge (testOfKnowledgeID, points)
+values
+(1, 10),
+(2, 15),
+(3, 70),
+(4, 90)
+
+insert into TestOfKnowledge (testOfKnowledgeID, points)
+values
+(5, 100),
+(6, 40),
+(7, 35),
+(8, 75),
+(9, 20),
+(10, 30),
+(11, 40),
+(12, 50)
+
+
+create table Class(
+classID integer primary key,
+className varchar(30) not null
+)
+insert into Class(classID, className)
+values
+(1, 'Begginer'),
+(2, 'Begginer'),
+(3, 'Pre-Senior'),
+(4, 'Senior')
+
+select * from Class
+UPDATE Class
+SET className = 'Pre-Junior'
+WHERE classID = 2;
+
+update class
+set className = 'Junior'
+where classID = 3
+
+update class
+set className = 'Pre-Senior'
+where classID = 4
+
+insert into Class(classID, className)
+values
+(5, 'Senior')
+
+
+create table Schedule (
+scheduleID integer primary key,
+time time not null,
+dayOfWeek varchar(50) not null
+)
+
+insert into Schedule(scheduleID, time, dayOfWeek)
+values
+(1, '14:00:00', 'Monday'),
+(2, '17:30:00', 'Monday'),
+(3, '10:00:00', 'Tuesday'),
+(4, '13:30:00', 'Tuesday')
+
+insert into Schedule(scheduleID, time, dayOfWeek)
+values
+(5, '14:00:00', 'Wednesday'),
+(6, '17:30:00', 'Wednesday'),
+(7, '10:00:00', 'Thursday'),
+(8, '13:30:00', 'Thursday')
+
+
+
+create table Competition (
+competitionID integer primary key,
+competitionType varchar(80) not null
+)
+
+insert into Competition(competitionID, competitionType)
+values
+(1, 'Bars, Beam'),
+(2, 'Floor, Beam'),
+(3, 'Floor, Bars, Beam'),
+(4, 'Floor, Bars'),
+(5, 'Beam, Bars')
+select * from Competition
+
+
+create table Achievement (
+achievementID integer,
+achievementType varchar(30) not null,
+competitionID integer references Competition(competitionID),
+personID integer references Member(personID),
+constraint pk_achieve_competitionID primary key(achievementID, competitionID)
+)
+
+insert into Achievement(achievementID, competitionID, personID, achievementType)
+values
+(1, 3, 4, 'bronze medal, commendation'),
+(2, 1, 5, 'commendation'),
+(3, 3, 6, 'silver medal, commendation')
+select * from Achievement
+
+insert into Achievement(achievementID, competitionID, personID, achievementType)
+values
+(4, 5, 7, 'gold medal, commendation'),
+(5, 4, 8, 'commendation'),
+(6, 4, 9, 'gold medal, commendation')
+(7, 5, 10, 'gold medal, commendation'),
+(8, 4, 11, 'commendation'),
+(9, 3, 12, 'gold medal, commendation'),
+(10, 1, 13, 'gold medal, commendation'),
+(11, 2, 14, 'commendation'),
+(12, 2, 15, 'gold medal, commendation'),
+(13, 2, 16, 'gold medal, commendation'),
+(14, 3, 17, 'commendation')
+
+
+create table Coach ( 
+personID integer primary key,
+constraint fk_personID foreign key (personID) references Person(personID)
+)
+insert into Coach(personID)
+values
+(1),
+(2),
+(3)
+select * from Coach
+
+create table Person (
+personID serial primary key,
+dateOfBirth date,
+lastName varchar(30),
+fisrtName varchar(30),
+tellNo varchar(15) default null
+)
+
+insert into Person(dateOfBirth, lastName, fisrtName, tellNo)
+values
+('12.12.1995', 'Popova', 'Mila', '071874215'),
+('15.08.1990', 'Hristova', 'Lilija', '071874215'),
+('15.08.1885', 'Popova', 'Emilija', '071874215'),
+('28.08.2002', 'Dobreva', 'Tea', '071234567'),
+('25.01.2001', 'Ristova', 'Jagoda', '078789456'),
+('12.12.2006', 'Maneva', 'Ana', '078785456')
+
+insert into Person(dateOfBirth, lastName, fisrtName, tellNo)
+values
+( '03.12.2010', 'Panova', 'Blagica', '071874999')
+insert into Person(dateOfBirth, lastName, fisrtName, tellNo)
+values
+('06.04.2011', 'Jovanova', 'Mia', '070123456'),
+('13.06.2011', 'Pendeva', 'Jana', '078548941')
+select * from Person
+
+insert into Person(dateOfBirth, lastName, fisrtName, tellNo)
+values
+('13.06.2010', 'Melova', 'Mia', '078548941'),
+('14.08.2010', 'Panova', 'Bojana', '078459785'),
+('15.08.2009', 'Milkova', 'Pavlince', '078789521'),
+('16.04.2009', 'Todeva', 'Mila', '078548121'),
+('13.12.2002', 'Ristova', 'Radica', '078500941'),
+('30.07.2002', 'Nikolova', 'Ivona', '071548941'),
+('09.06.2002', 'Nikolovska', 'Ljubica', '070558941'),
+('09.03.2005', 'Dzulanova', 'Kristina', '071548000'),
+('04.04.2005', 'Pendevska', 'Teodora', '071895480'),
+('23.12.2006', 'Stevkovska', 'Roze', '071445871'),
+('22.01.2006', 'Taseva', 'Despina', '071548941'),
+('22.02.2003', 'Tashevska', 'Rosica', '072548941'),
+('07.03.2004', 'Milanova', 'Anisija', '075588841'),
+('04.04.2005', 'Ilova', 'Leontina', '075544941')
+
+
+create table Member (
+personID integer primary key,
+groupNumberID integer references "Group"(groupNumberID),
+testOfKnowledgeID integer references TestOfKnowledge(testOfKnowledgeID),
+constraint fk_person foreign key (personID) references Person(personID)
+)
+insert into Member(personID, groupNumberID, testOfKnowledgeID)
+values
+(4, 1, 1),
+(5, 2, 2),
+(6, 3, 3)
+select * from Member
+insert into Member(personID, groupNumberID, testOfKnowledgeID)
+values
+(7, 1, 2),
+(8, 1, 2),
+(9, 1, 2),
+(10, 1, 2),
+(11, 2, 3),
+(12, 3, 4),
+(13, 4, 1)
+
+insert into Member(personID, groupNumberID, testOfKnowledgeID)
+values
+(14, 1, 1),
+(15, 2, 2),
+(16, 3, 8),
+(17, 4, 8)
+
+
+	
+create table Member_attends_Class( 
+personID integer references Member(personID),
+classID integer references Class(classID),
+constraint pk_person_class primary key (personID, classID)
+)
+insert into Member_attends_Class(personID, classID)
+values
+(4, 1),
+(5, 2),
+(6, 2),
+(7, 1),
+(8, 2),
+(9, 3),
+(10, 4),
+(11, 1),
+(12, 3),
+
+insert into Member_attends_Class(personID, classID)
+values
+(14, 1),
+(15,2),
+(16, 4),
+(17, 3),
+
+
+
+
+create table Member_participatesIn_Competition(
+personID integer references Member(personID),
+competitionID integer references Competition(CompetitionID),
+constraint pk_person_comp primary key (personID, competitionID)
+)
+insert into Member_participatesIn_Competition(personID, competitionID)
+values
+(4, 3),
+(5, 2)
+
+
+create table Coach_teaches_Member(
+personMemberID integer,
+personCoachID integer,
+constraint pk_person_member primary key (personMemberID, personCoachID),
+constraint fk_personmemberid foreign key (personMemberID) references Member(personID),
+constraint fk_personcoachid foreign key (personCoachID) references Coach(personID)
+)
+insert into Coach_teaches_Member(personMemberID, personCoachID)
+values 
+(4, 1),
+(5, 2)
+
+create table Class_isHeldIn_Schedule(
+scheduleID integer references Schedule(scheduleID),
+classID integer references Class(classID),
+constraint pk_schedule_class primary key (scheduleID, classID)
+)
+insert into Class_isHeldIn_Schedule(scheduleID, classID)
+values
+(1, 1),
+(2, 1)
+
